@@ -1,0 +1,75 @@
+---
+import '../styles/global.css'
+import { Nav } from '../components/Nav'
+import Footer from '../components/Footer.astro'
+import { APP } from '../data/app'
+
+interface Props {
+  path?: string
+  title?: string
+  description?: string
+}
+const { path = '/', title, description } = Astro.props
+const pageTitle = title ?? `${APP.name} — ${APP.tagline}`
+const desc = description ?? APP.tagline
+const canonical = new URL(Astro.url.pathname, Astro.site).href
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content="https://sprout.signalizeai.org/og.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:image" content="https://sprout.signalizeai.org/og.png" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <script is:inline>
+      document.documentElement.classList.add('js')
+    </script>
+  </head>
+  <body>
+    <Nav path={path} client:load />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+    <script>
+      const io = new IntersectionObserver(
+        (entries) => {
+          for (const e of entries) {
+            if (e.isIntersecting) {
+              e.target.classList.add('in')
+              io.unobserve(e.target)
+            }
+          }
+        },
+        { rootMargin: '0px 0px -8% 0px' },
+      )
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el))
+      window.addEventListener('load', () =>
+        setTimeout(() => document.querySelectorAll('.reveal:not(.in)').forEach((el) => el.classList.add('in')), 1400),
+      )
+
+      if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        import('lenis').then(({ default: Lenis }) => {
+          const lenis = new Lenis({ duration: 1.1, smoothWheel: true })
+          const raf = (t: number) => {
+            lenis.raf(t)
+            requestAnimationFrame(raf)
+          }
+          requestAnimationFrame(raf)
+        })
+      }
+    </script>
+  </body>
+</html>

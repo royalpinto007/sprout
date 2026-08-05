@@ -1,0 +1,43 @@
+---
+import { HABITS } from '../data/app'
+const done = HABITS.filter((h) => h.done).length
+---
+
+<div class="phone mx-auto w-[280px] overflow-hidden">
+  <div class="px-5 pt-6 pb-7">
+    <div class="flex items-center justify-between">
+      <div>
+        <p class="text-xs font-bold text-[var(--color-dim)]">Good morning</p>
+        <p class="font-display text-2xl font-semibold">Today</p>
+      </div>
+      <span class="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-mist)] text-lg">🌤️</span>
+    </div>
+
+    <div class="mt-5 rounded-2xl bg-[var(--color-mist)] p-4">
+      <div class="flex items-baseline justify-between">
+        <span class="text-sm font-bold">{done} of {HABITS.length} done</span>
+        <span class="text-xs font-bold text-[var(--color-leaf-deep)]">Keep going!</span>
+      </div>
+      <div class="mt-2 h-2 w-full overflow-hidden rounded-full bg-[var(--color-line)]">
+        <div class="h-full rounded-full bg-[var(--color-leaf)]" style={`width:${(done / HABITS.length) * 100}%`}></div>
+      </div>
+    </div>
+
+    <ul class="mt-4 space-y-2.5">
+      {HABITS.map((h) => (
+        <li class="flex items-center gap-3 rounded-2xl border border-[var(--color-line)] p-3">
+          <span class="grid h-9 w-9 shrink-0 place-items-center rounded-full text-base" style={`background:${h.color}33`}>{h.icon}</span>
+          <span class="flex-1">
+            <span class="block text-sm font-bold leading-tight">{h.name}</span>
+            <span class="block text-xs text-[var(--color-dim)]">🔥 {h.streak} day streak</span>
+          </span>
+          <span
+            class={`grid h-6 w-6 place-items-center rounded-full text-xs ${h.done ? 'bg-[var(--color-leaf)] text-white' : 'border-2 border-[var(--color-line)]'}`}
+          >
+            {h.done ? '✓' : ''}
+          </span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>

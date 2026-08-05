@@ -1,0 +1,36 @@
+---
+import { APP, NAV } from '../data/app'
+---
+
+<footer class="border-t border-[var(--color-line)] bg-[var(--color-card)]">
+  <div class="mx-auto max-w-6xl px-6 py-16 lg:px-8">
+    <div class="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
+      <div>
+        <p class="flex items-center gap-2 font-display text-2xl font-semibold">
+          <span class="grid h-8 w-8 place-items-center rounded-full bg-[var(--color-leaf)] text-base">🌱</span>
+          {APP.name}
+        </p>
+        <p class="mt-4 max-w-xs text-sm text-[var(--color-dim)]">{APP.tagline}</p>
+      </div>
+      <div>
+        <p class="u-label text-[var(--color-dim)]">Product</p>
+        <ul class="mt-4 space-y-2 text-sm font-semibold">
+          {NAV.map((n) => (
+            <li><a href={n.href} class="transition-colors hover:text-[var(--color-leaf-deep)]">{n.label}</a></li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p class="u-label text-[var(--color-dim)]">Get the app</p>
+        <ul class="mt-4 space-y-2 text-sm font-semibold text-[var(--color-dim)]">
+          <li><a href="#" class="transition-colors hover:text-[var(--color-ink)]">App Store</a></li>
+          <li><a href="#" class="transition-colors hover:text-[var(--color-ink)]">Google Play</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="mt-14 flex flex-col justify-between gap-2 border-t border-[var(--color-line)] pt-6 text-xs text-[var(--color-dim)] sm:flex-row">
+      <p>© 2026 {APP.name} — a concept product site by Royal Simpson Pinto.</p>
+      <p>Sprout is a design concept, not a shipping app.</p>
+    </div>
+  </div>
+</footer>
