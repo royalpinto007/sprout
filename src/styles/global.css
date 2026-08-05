@@ -1,0 +1,119 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/fraunces';
+@import '@fontsource-variable/nunito';
+
+@theme {
+  --color-mist: #f4f8f2;
+  --color-card: #ffffff;
+  --color-ink: #23302a;
+  --color-dim: #5f6f66;
+  --color-line: #e4ebe3;
+  --color-leaf: #34a06a;
+  --color-leaf-deep: #1f7a4d;
+  --color-peach: #ffb59e;
+  --color-lilac: #c3b4f2;
+  --color-sky: #a9d8ec;
+  --font-display: 'Fraunces Variable', serif;
+  --font-body: 'Nunito Variable', sans-serif;
+}
+
+html {
+  background: var(--color-mist);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+body {
+  margin: 0;
+}
+::selection {
+  background: var(--color-leaf);
+  color: #fff;
+}
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+}
+.u-label {
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* soft blobby background */
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(50px);
+  opacity: 0.55;
+  z-index: -1;
+}
+
+/* phone mockup screen */
+.phone {
+  border-radius: 2.6rem;
+  background: var(--color-card);
+  box-shadow:
+    0 40px 80px -30px rgba(31, 122, 77, 0.35),
+    0 0 0 10px #1a241f,
+    0 0 0 12px #2c3a33;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.anim-rise {
+  animation: rise 0.9s cubic-bezier(0.2, 0.7, 0.2, 1) both;
+}
+@keyframes floaty {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(-12px);
+  }
+}
+.floaty {
+  animation: floaty 4s ease-in-out infinite alternate;
+}
+
+.js .reveal {
+  opacity: 0;
+  transform: translateY(22px);
+}
+.js .reveal.in {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.9s ease,
+    transform 0.9s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.js .reveal[data-d='2'].in {
+  transition-delay: 0.09s;
+}
+.js .reveal[data-d='3'].in {
+  transition-delay: 0.18s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+  .js .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .floaty {
+    animation: none !important;
+  }
+}
