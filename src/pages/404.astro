@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro'
+---
+
+<Base path="/404" title="Not found — Sprout">
+  <section class="relative flex min-h-[80vh] flex-col items-center justify-center overflow-hidden px-6 text-center">
+    <div class="blob h-72 w-72 bg-[var(--color-leaf)]" style="top:4rem;left:20%"></div>
+    <div class="blob h-64 w-64 bg-[var(--color-peach)]" style="bottom:4rem;right:20%"></div>
+    <p class="anim-rise text-7xl">🪴</p>
+    <h1 class="anim-rise mt-4 font-display text-5xl font-semibold tracking-tight sm:text-6xl" style="animation-delay:.08s">This page hasn't sprouted.</h1>
+    <p class="anim-rise mt-4 max-w-md text-lg text-[var(--color-dim)]" style="animation-delay:.16s">The page you're looking for isn't here, but your garden is just a tap away.</p>
+    <a href="/" class="anim-rise mt-8 rounded-2xl bg-[var(--color-leaf)] px-7 py-3.5 font-bold text-white transition hover:bg-[var(--color-leaf-deep)]" style="animation-delay:.24s">Back home</a>
+  </section>
+</Base>
