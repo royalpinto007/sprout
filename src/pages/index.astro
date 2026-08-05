@@ -1,0 +1,109 @@
+---
+import Base from '../layouts/Base.astro'
+import Phone from '../components/Phone.astro'
+import { APP, STATS, STEPS, FEATURES, STORIES } from '../data/app'
+---
+
+<Base path="/">
+  <!-- Hero -->
+  <section class="relative overflow-hidden">
+    <div class="blob h-72 w-72 bg-[var(--color-leaf)]" style="top:-4rem;left:-3rem"></div>
+    <div class="blob h-80 w-80 bg-[var(--color-peach)]" style="top:6rem;right:-4rem"></div>
+    <div class="blob h-64 w-64 bg-[var(--color-lilac)]" style="bottom:-4rem;left:30%"></div>
+    <div class="mx-auto grid max-w-6xl items-center gap-12 px-6 pt-36 pb-20 sm:pt-44 lg:grid-cols-2 lg:px-8">
+      <div>
+        <p class="anim-rise inline-flex items-center gap-2 rounded-full bg-[var(--color-card)] px-3 py-1 text-xs font-bold text-[var(--color-leaf-deep)] shadow-sm">
+          🌿 4.9 on the App Store
+        </p>
+        <h1 class="anim-rise mt-6 font-display text-5xl leading-[1.02] font-semibold tracking-tight sm:text-6xl" style="animation-delay:.08s">
+          Small habits,<br />gently kept.
+        </h1>
+        <p class="anim-rise mt-5 max-w-md text-lg text-[var(--color-dim)]" style="animation-delay:.16s">
+          {APP.tagline} No streaks to dread, no red numbers, no guilt. Just a little plant that grows every day you show up.
+        </p>
+        <div class="anim-rise mt-8 flex flex-wrap gap-3" style="animation-delay:.24s">
+          <a href="#" class="flex items-center gap-2 rounded-2xl bg-[var(--color-ink)] px-5 py-3 font-bold text-white transition hover:brightness-125"><span class="text-lg"></span> App Store</a>
+          <a href="#" class="flex items-center gap-2 rounded-2xl bg-[var(--color-ink)] px-5 py-3 font-bold text-white transition hover:brightness-125"><span class="text-lg">▶</span> Google Play</a>
+        </div>
+        <p class="anim-rise mt-4 text-sm text-[var(--color-dim)]" style="animation-delay:.3s">Free forever for up to five habits.</p>
+      </div>
+      <div class="floaty anim-rise" style="animation-delay:.2s">
+        <Phone />
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="border-y border-[var(--color-line)] bg-[var(--color-card)]">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-12 md:grid-cols-4 lg:px-8">
+      {STATS.map((s, i) => (
+        <div class="reveal text-center" data-d={String((i % 3) + 1)}>
+          <div class="font-display text-4xl font-semibold text-[var(--color-leaf-deep)]">{s.value}</div>
+          <div class="mt-1 text-sm text-[var(--color-dim)]">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Steps -->
+  <section class="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+    <h2 class="reveal text-center font-display text-4xl font-semibold tracking-tight sm:text-5xl">How Sprout works</h2>
+    <div class="mt-14 grid gap-8 md:grid-cols-3">
+      {STEPS.map((s, i) => (
+        <div class="reveal rounded-3xl bg-[var(--color-card)] p-8 text-center shadow-sm" data-d={String((i % 3) + 1)}>
+          <div class="mx-auto grid h-14 w-14 place-items-center rounded-full bg-[var(--color-mist)] font-display text-xl font-semibold text-[var(--color-leaf-deep)]">{s.n}</div>
+          <h3 class="mt-5 font-display text-2xl font-semibold">{s.title}</h3>
+          <p class="mt-2 text-[var(--color-dim)]">{s.body}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="border-t border-[var(--color-line)] bg-[var(--color-card)]">
+    <div class="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+      <h2 class="reveal max-w-2xl font-display text-4xl font-semibold tracking-tight sm:text-5xl">Kind by design.</h2>
+      <div class="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {FEATURES.map((f, i) => (
+          <div class="reveal rounded-3xl border border-[var(--color-line)] p-7" data-d={String((i % 3) + 1)}>
+            <div class="grid h-12 w-12 place-items-center rounded-2xl text-xl" style={`background:${f.tint}22`}>{f.icon}</div>
+            <h3 class="mt-4 font-display text-xl font-semibold">{f.title}</h3>
+            <p class="mt-2 text-[var(--color-dim)]">{f.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stories -->
+  <section class="mx-auto max-w-6xl px-6 py-24 lg:px-8">
+    <div class="flex items-baseline justify-between">
+      <h2 class="reveal font-display text-4xl font-semibold tracking-tight sm:text-5xl">Loved, gently.</h2>
+      <a href="/stories" class="u-label text-[var(--color-leaf-deep)] transition hover:opacity-70">More stories →</a>
+    </div>
+    <div class="mt-10 grid gap-6 md:grid-cols-2">
+      {STORIES.slice(0, 2).map((s, i) => (
+        <figure class="reveal rounded-3xl bg-[var(--color-card)] p-8 shadow-sm" data-d={String((i % 2) + 1)}>
+          <blockquote class="font-display text-xl leading-snug">“{s.quote}”</blockquote>
+          <figcaption class="mt-5 flex items-center gap-3">
+            <span class="grid h-10 w-10 place-items-center rounded-full font-bold text-white" style={`background:${s.tint}`}>{s.name[0]}</span>
+            <span><span class="block text-sm font-bold">{s.name}</span><span class="block text-xs text-[var(--color-dim)]">{s.role}</span></span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="mx-auto max-w-6xl px-6 pb-24 lg:px-8">
+    <div class="reveal relative overflow-hidden rounded-[2.5rem] bg-[var(--color-leaf-deep)] px-8 py-16 text-center text-white">
+      <div class="blob h-56 w-56 bg-[var(--color-peach)]" style="top:-2rem;right:2rem;opacity:.35"></div>
+      <h2 class="font-display text-4xl font-semibold tracking-tight sm:text-5xl">Plant your first habit today.</h2>
+      <p class="mx-auto mt-4 max-w-md text-white/80">It takes two minutes and it is free. Your garden is waiting.</p>
+      <div class="mt-8 flex flex-wrap justify-center gap-3">
+        <a href="#" class="rounded-2xl bg-white px-6 py-3 font-bold text-[var(--color-leaf-deep)] transition hover:bg-[var(--color-mist)]"> App Store</a>
+        <a href="#" class="rounded-2xl bg-white/15 px-6 py-3 font-bold text-white transition hover:bg-white/25">▶ Google Play</a>
+      </div>
+    </div>
+  </section>
+</Base>
