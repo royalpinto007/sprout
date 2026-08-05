@@ -1,0 +1,46 @@
+---
+import Base from '../layouts/Base.astro'
+import { STORIES, STATS } from '../data/app'
+---
+
+<Base path="/stories" title="Stories — Sprout" description="Real-feeling words from people quietly keeping their habits with Sprout.">
+  <section class="relative overflow-hidden">
+    <div class="blob h-72 w-72 bg-[var(--color-sky)]" style="top:0;right:-4rem"></div>
+    <div class="mx-auto max-w-6xl px-6 pt-36 pb-12 text-center sm:pt-44 lg:px-8">
+      <p class="anim-rise u-label text-[var(--color-leaf-deep)]">Stories</p>
+      <h1 class="anim-rise mx-auto mt-5 max-w-2xl font-display text-5xl leading-[1.03] font-semibold tracking-tight sm:text-6xl" style="animation-delay:.08s">
+        Small days add up to something.
+      </h1>
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-6 pb-16 lg:px-8">
+    <div class="grid gap-6 md:grid-cols-2">
+      {STORIES.map((s, i) => (
+        <figure class="reveal rounded-3xl bg-[var(--color-card)] p-8 shadow-sm" data-d={String((i % 3) + 1)}>
+          <blockquote class="font-display text-2xl leading-snug">“{s.quote}”</blockquote>
+          <figcaption class="mt-6 flex items-center gap-3">
+            <span class="grid h-11 w-11 place-items-center rounded-full text-lg font-bold text-white" style={`background:${s.tint}`}>{s.name[0]}</span>
+            <span><span class="block font-bold">{s.name}</span><span class="block text-sm text-[var(--color-dim)]">{s.role}</span></span>
+          </figcaption>
+        </figure>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-[var(--color-line)] bg-[var(--color-card)]">
+    <div class="mx-auto grid max-w-6xl grid-cols-2 gap-8 px-6 py-14 md:grid-cols-4 lg:px-8">
+      {STATS.map((s, i) => (
+        <div class="reveal text-center" data-d={String((i % 3) + 1)}>
+          <div class="font-display text-4xl font-semibold text-[var(--color-leaf-deep)]">{s.value}</div>
+          <div class="mt-1 text-sm text-[var(--color-dim)]">{s.label}</div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-3xl px-6 py-24 text-center lg:px-8">
+    <h2 class="reveal font-display text-4xl font-semibold tracking-tight sm:text-5xl">Start your own small streak.</h2>
+    <a href="/pricing" class="reveal mt-8 inline-block rounded-2xl bg-[var(--color-leaf)] px-7 py-3.5 font-bold text-white transition hover:bg-[var(--color-leaf-deep)]">Get Sprout free</a>
+  </section>
+</Base>
